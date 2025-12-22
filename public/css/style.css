@@ -1,0 +1,1263 @@
+/* ============================================================================
+   CAMPUS NAVIGATION APP - MAIN STYLESHEET
+   ============================================================================
+   This stylesheet defines the visual design for the CampusNav application.
+   It uses a dark theme with glassmorphism effects and a gradient background.
+   ============================================================================ */
+
+/* ============================================================================
+   CSS RESET & BASE STYLES
+   ============================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================================
+   Centralized color, spacing, and design values for easy maintenance.
+   ============================================================================ */
+:root {
+    /* Background Gradient Colors
+       Gradient flows from bottom-right (orange) to top-left (indigo) */
+    --gradient-indigo: #0f1325;   /* Deep indigo/purple - top-left */
+    --gradient-purple: #1a0f2e;   /* Dark purple - middle */
+    --gradient-brown: #5a3d28;    /* Warm brown - middle */
+    --gradient-orange: #6b4528;   /* Burnt orange - bottom-right */
+    
+    /* Text Colors */
+    --text-white: #ffffff;
+    --text-light: rgba(255, 255, 255, 0.95);
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --text-gold: #c49a6a;         /* Golden brown accent for hero text */
+    
+    /* Button Gradient Colors */
+    --btn-gradient-start: #2a3549;      /* Dark blue */
+    --btn-gradient-end: #4a3d6b;        /* Purple/blue */
+    --btn-gradient-orange: #8b5a3c;     /* Orange for login button */
+    --btn-gradient-orange-end: #6b4528; /* Orange gradient end */
+    
+    /* Card Background Colors */
+    --card-bg: #0f0f0f;
+    --card-bg-light: #1a1a1a;
+    
+    /* Spacing Scale (8px base unit) */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 1.5rem;   /* 24px */
+    --spacing-lg: 2rem;     /* 32px */
+    --spacing-xl: 3rem;     /* 48px */
+    --spacing-2xl: 4rem;    /* 64px */
+    
+    /* Z-Index Layers */
+    --z-navbar: 1000;
+    --z-mobile-menu: 1001;
+    --z-overlay: 998;
+}
+
+/* ============================================================================
+   BASE HTML ELEMENTS
+   ============================================================================ */
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--text-white);
+    overflow-x: hidden;
+    
+    /* Diagonal gradient background (bottom-right to top-left) */
+    background: linear-gradient(
+        to top left,
+        var(--gradient-orange) 0%,
+        var(--gradient-brown) 30%,
+        var(--gradient-purple) 70%,
+        var(--gradient-indigo) 100%
+    );
+    background-attachment: fixed; /* Fixed for parallax-like effect */
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+}
+
+/* ============================================================================
+   NAVIGATION BAR
+   ============================================================================
+   Scrolls with page content and features glassmorphism effect.
+   ============================================================================ */
+.navbar {
+    position: relative; /* Scrolls with content (not fixed) */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-navbar);
+    padding: 1rem 2rem;
+    
+    /* Glassmorphism effect */
+    background: rgba(15, 19, 37, 0.3);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    width: 1600px;
+    height: 65px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+}
+
+/* Mobile Menu Toggle (Hamburger Icon) */
+.mobile-menu-toggle {
+    display: none; /* Hidden on desktop */
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: var(--z-mobile-menu);
+}
+
+.mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-white);
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Hamburger to X animation */
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Logo Section */
+.logo {
+    display: flex;
+    flex: auto;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: #4a3d6b;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-c {
+    color: var(--text-white);
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+}
+
+.logo h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-white);
+    letter-spacing: -0.3px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: white !important;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+/* Login Button */
+.login-btn {
+    background: linear-gradient(
+        135deg,
+        var(--btn-gradient-orange) 0%,
+        var(--btn-gradient-orange-end) 100%
+    );
+    border: none;
+    color: var(--text-white);
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(107, 69, 40, 0.4);
+}
+
+/* ============================================================================
+   HERO SECTION
+   ============================================================================
+   Full-viewport landing section with main call-to-action.
+   ============================================================================ */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 900px;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Responsive font sizing */
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1.5px;
+}
+
+.hero-title-white {
+    color: var(--text-white);
+    display: block;
+}
+
+.hero-title-gold {
+    color: var(--text-gold);
+    display: block;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Call-to-Action Button */
+.cta-button {
+    background: linear-gradient(
+        135deg,
+        var(--btn-gradient-start) 0%,
+        var(--btn-gradient-end) 100%
+    );
+    border: none;
+    color: var(--text-white);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 61, 107, 0.5);
+}
+
+.arrow-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* ============================================================================
+   SECTION STYLES (Shared)
+   ============================================================================
+   Common styles for all content sections.
+   ============================================================================ */
+.section-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--text-white);
+    letter-spacing: -1px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+}
+
+/* ============================================================================
+   PROBLEM SECTION (Reddit-Style Cards)
+   ============================================================================
+   Displays student complaints in Reddit-inspired card format.
+   ============================================================================ */
+.problem-section {
+    padding: 5rem 0;
+    background: rgba(15, 19, 37, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0;
+    border-radius: 0;
+}
+
+.reddit-posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.reddit-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reddit-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Upvote Section (Left Side) */
+.reddit-upvote-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 40px;
+}
+
+.upvote-arrow {
+    color: var(--text-white);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.upvote-arrow:hover {
+    color: #ff4500; /* Reddit orange */
+}
+
+.upvote-count {
+    color: var(--text-white);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Post Content (Right Side) */
+.reddit-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.reddit-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.reddit-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.reddit-avatar svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Avatar Color Variants */
+.reddit-avatar-1 {
+    background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+}
+
+.reddit-avatar-2 {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+.reddit-avatar-3 {
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+}
+
+.reddit-avatar-4 {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}
+
+.reddit-user {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.reddit-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-white);
+    line-height: 1.5;
+}
+
+.reddit-comments-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.comment-icon {
+    color: var(--text-muted);
+    width: 16px;
+    height: 16px;
+}
+
+.comment-count {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ============================================================================
+   SOLUTION SECTION
+   ============================================================================
+   Showcases the app's key features with icon cards.
+   ============================================================================ */
+.solution-section {
+    padding: 5rem 0;
+    background: rgba(26, 15, 46, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0;
+    border-radius: 0;
+}
+
+.solution-description {
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--text-white);
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    font-weight: 400;
+}
+
+.solution-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(
+        135deg,
+        var(--btn-gradient-orange) 0%,
+        var(--btn-gradient-orange-end) 100%
+    );
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.feature-icon {
+    color: var(--text-white);
+    width: 28px;
+    height: 28px;
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ============================================================================
+   TECH STACK SECTION
+   ============================================================================
+   Displays technologies organized by category in a grid layout.
+   ============================================================================ */
+.tech-section {
+    padding: 5rem 0;
+    background: rgba(90, 61, 40, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0;
+    border-radius: 0;
+}
+
+.tech-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.tech-column-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tech-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tech-item {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tech-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.tech-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+/* Technology Icon Color Variants */
+.tech-icon-react {
+    background: #61dafb;
+    color: #000;
+}
+
+.tech-icon-typescript {
+    background: #3178c6;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.tech-icon-tailwind {
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    color: #fff;
+}
+
+.tech-icon-motion {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    color: #fff;
+}
+
+.tech-icon-node {
+    background: #339933;
+    color: #fff;
+}
+
+.tech-icon-express {
+    background: #000;
+    color: #fff;
+}
+
+.tech-icon-graphql {
+    background: #e10098;
+    color: #fff;
+}
+
+.tech-icon-rest {
+    background: #6b5b95;
+    color: #fff;
+}
+
+.tech-icon-postgres {
+    background: #336791;
+    color: #fff;
+}
+
+.tech-icon-redis {
+    background: #dc382d;
+    color: #fff;
+}
+
+.tech-icon-mongo {
+    background: #47a248;
+    color: #fff;
+}
+
+.tech-icon-maps {
+    background: #4285f4;
+    color: #fff;
+}
+
+.tech-icon-aws {
+    background: #232f3e;
+    color: #fff;
+}
+
+.tech-icon-docker {
+    background: #2496ed;
+    color: #fff;
+}
+
+.tech-icon-github {
+    background: #181717;
+    color: #fff;
+}
+
+.tech-name {
+    color: var(--text-white);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ============================================================================
+   DEVELOPERS SECTION
+   ============================================================================
+   Team member profiles with avatars and social links.
+   ============================================================================ */
+.developers-section {
+    padding: 5rem 0;
+    background: rgba(107, 69, 40, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0;
+    border-radius: 0;
+}
+
+.developers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.developer-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.developer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Developer Avatar (supports both image and text initials) */
+.developer-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-white);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Image avatar override */
+img.developer-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: none;
+    display: block;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.developer-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: 0.5rem;
+}
+
+.developer-role {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.developer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.developer-socials a {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+}
+
+.developer-socials a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+.footer {
+    background: rgba(15, 19, 37, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--text-white);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================
+   Mobile-first responsive breakpoints for optimal viewing on all devices.
+   ============================================================================ */
+
+/* Tablet and Smaller Desktop (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .reddit-posts {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+    
+    .tech-columns {
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+    }
+    
+    .developers-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+    }
+    
+    .solution-features {
+        grid-template-columns: 1fr; /* Single column */
+    }
+    
+    .section-container {
+        padding: 4rem 1.5rem;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-container {
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
+    
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    /* Mobile Navigation Menu (Slide-out Panel) */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hidden off-screen */
+        width: 280px;
+        max-width: 85vw;
+        height: 100vh;
+        background: rgba(15, 19, 37, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 5rem 2rem 2rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: var(--z-navbar);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        flex: none;
+    }
+    
+    .nav-links.active {
+        right: 0; /* Slide in when active */
+    }
+    
+    .nav-link {
+        width: 100%;
+        padding: 0.75rem 0;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: block;
+        flex: none;
+        text-align: left;
+    }
+    
+    .nav-link:hover {
+        padding-left: 0.5rem;
+        transition: padding-left 0.2s ease;
+    }
+    
+    .login-btn {
+        order: 2;
+        margin-left: auto;
+    }
+    
+    .nav-link {
+        font-size: 0.9rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .login-btn {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Hero Section Adjustments */
+    .hero {
+        padding: 5rem 1rem 3rem;
+        min-height: 90vh;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        margin-bottom: 2rem;
+    }
+    
+    .cta-button {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+    
+    /* Section Adjustments */
+    .section-container {
+        padding: 3rem 1rem;
+    }
+    
+    .section-title {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        margin-bottom: 0.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+    
+    .problem-section,
+    .solution-section,
+    .tech-section,
+    .developers-section {
+        margin: 0;
+        padding: 3rem 0;
+    }
+    
+    /* Reddit Cards - Stack vertically on mobile */
+    .reddit-card {
+        padding: 1.25rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .reddit-upvote-section {
+        flex-direction: row;
+        justify-content: flex-start;
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .reddit-content {
+        width: 100%;
+    }
+    
+    .reddit-title {
+        font-size: 0.95rem;
+    }
+    
+    /* Tech Stack - Single column */
+    .tech-columns {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Developers - Single column */
+    .developers-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Solution Features - Single column */
+    .solution-features {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .feature-icon-wrapper {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 1.25rem;
+    }
+    
+    .feature-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .developer-card {
+        padding: 1.5rem;
+    }
+    
+    .developer-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .developer-name {
+        font-size: 1.1rem;
+    }
+    
+    .developer-role {
+        font-size: 0.9rem;
+    }
+    
+    .tech-item {
+        padding: 0.875rem;
+    }
+    
+    .tech-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+    
+    .tech-name {
+        font-size: 0.9rem;
+    }
+    
+    .footer {
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
+
+/* Small Mobile Devices (max-width: 480px) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .logo {
+        gap: 0.5rem;
+    }
+    
+    .logo-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .logo-c {
+        font-size: 1rem;
+    }
+    
+    .logo h2 {
+        font-size: 0.95rem;
+    }
+    
+    .mobile-menu-toggle {
+        padding: 0.4rem;
+    }
+    
+    .mobile-menu-toggle span {
+        width: 20px;
+    }
+    
+    .nav-links {
+        width: 260px;
+        padding: 4.5rem 1.5rem 2rem;
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+        padding: 0.65rem 0;
+        flex: none;
+        text-align: left;
+    }
+    
+    .login-btn {
+        padding: 0.45rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .hero {
+        padding: 4rem 0.75rem 2rem;
+        min-height: 85vh;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+    
+    .cta-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .section-container {
+        padding: 2.5rem 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .problem-section,
+    .solution-section,
+    .tech-section,
+    .developers-section {
+        margin: 0;
+        padding: 2.5rem 0;
+    }
+    
+    .reddit-card {
+        padding: 1rem;
+    }
+    
+    .reddit-avatar {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .reddit-user {
+        font-size: 0.8rem;
+    }
+    
+    .reddit-title {
+        font-size: 0.9rem;
+    }
+    
+    .upvote-count,
+    .comment-count {
+        font-size: 0.8rem;
+    }
+    
+    .solution-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .feature-card {
+        padding: 1.25rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .feature-card p {
+        font-size: 0.85rem;
+    }
+    
+    .tech-column-title {
+        font-size: 0.9rem;
+    }
+    
+    .developer-name {
+        font-size: 1rem;
+    }
+    
+    .developer-role {
+        font-size: 0.85rem;
+    }
+    
+    .social-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .footer {
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .footer-text,
+    .footer-link {
+        font-size: 0.85rem;
+    }
+}
