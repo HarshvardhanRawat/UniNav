@@ -1,7 +1,8 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const mongoose = require('mongoose');
 const initData = require('./data.js');
-const rooms = require('../models/rooms.js')
+const rooms = require('../models/rooms.js');
 
 const main = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
