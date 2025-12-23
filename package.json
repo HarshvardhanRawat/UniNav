@@ -1,9 +1,11 @@
 {
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
     "express": "^5.2.1",
+    "express-session": "^1.18.2",
     "firebase-admin": "^13.6.0",
     "flash": "^1.1.0",
     "joi": "^18.0.2",

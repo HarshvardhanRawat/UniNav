@@ -15,7 +15,7 @@ const path = require('path');
 const wrapAsync = require('./utilts/wrapAsync');
 
 //Needed to read form data
-app.use(expres.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 //Ejs-Mate setup
 app.engine('ejs', ejsMate);
@@ -32,6 +32,19 @@ app.use(methodOverride('_method'));
 //Server configuration
 const connectMongo = require("./services/mongo");
 const port = process.env.PORT || 8080;
+
+//Session configuration
+const session = require('express-session');
+const sessionOptions = {
+    secret: "thisshould",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000, // 1 week
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+    }
+};
 
 //Flash middleware setup
 app.use(session(sessionOptions));
@@ -56,10 +69,8 @@ app.get('/termsCondition', wrapAsync(async (req, res) => {
     res.render("index/termsCondition.ejs");
 }));
 
-app.get('/db', wrapAsync(async (req, res) => {
-    const rooms = await rooms.find();
-    res.render("index/db.ejs", { rooms });
-}));
+const dbs = require('./routes/dbs.js');
+app.use('/dbs' , dbs);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
