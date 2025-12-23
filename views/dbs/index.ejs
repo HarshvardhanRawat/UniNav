@@ -1,0 +1,55 @@
+<% layout('layouts/boilerplate') %>
+
+<section class="container py-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h1 class="h3 mb-1">Database Records</h1>
+      <p class="text-muted mb-0">Rooms stored in MongoDB</p>
+    </div>
+    <span class="badge text-bg-primary fs-6">
+      Total: <%= rooms?.length || 0 %>
+    </span>
+  </div>
+
+  <% if (rooms && rooms.length) { %>
+    <div class="card shadow-sm">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Building</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Room</th>
+                <th scope="col">Landmark</th>
+                <th scope="col">Digipin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% rooms.forEach((room, idx) => { %>
+                <tr>
+                  <th scope="row" class="text-muted"><%= idx + 1 %></th>
+                  <td class="fw-semibold"><%= room.building || '-' %></td>
+                  <td><%= room.floor || '-' %></td>
+                  <td><%= room.room || '-' %></td>
+                  <td><%= room.landmark || '-' %></td>
+                  <td><code><%= room.digipin || '-' %></code></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center">
+        <span class="text-muted small">Showing <%= rooms.length %> record(s)</span>
+        <span class="text-muted small">Updated <%= new Date().toLocaleString() %></span>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="alert alert-warning d-flex align-items-center" role="alert">
+      <i class="fa-solid fa-database me-2"></i>
+      No records found yet. Add rooms to see them here.
+    </div>
+  <% } %>
+</section>
