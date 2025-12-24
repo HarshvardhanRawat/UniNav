@@ -1,9 +1,6 @@
 /* ============================================================================
    CAMPUS NAVIGATION APP - MAIN STYLESHEET
    ============================================================================
-   This stylesheet defines the visual design for the CampusNav application.
-   It uses a dark theme with glassmorphism effects and a gradient background.
-   ============================================================================ */
 
 /* ============================================================================
    CSS RESET & BASE STYLES
@@ -14,11 +11,6 @@
     box-sizing: border-box;
 }
 
-/* ============================================================================
-   CSS CUSTOM PROPERTIES (Design Tokens)
-   ============================================================================
-   Centralized color, spacing, and design values for easy maintenance.
-   ============================================================================ */
 :root {
     /* Background Gradient Colors
        Gradient flows from bottom-right (orange) to top-left (indigo) */
