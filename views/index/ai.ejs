@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniNav</title>
+    <link rel="stylesheet" href="/css/styleai.css">
+</head>
+<body>
+    <h1>Campus AI Assistant</h1>
+    
+    <form method="POST" action="/ai/ask">
+        <input type="text" name="question" placeholder="Where is my class?" required />
+        <button type="submit">Ask AI</button>
+    </form>
+    
+    <% if (answer) { %>
+        <h3>Answer:</h3>
+        <pre><%= answer %></pre>
+    <% } %>
+    
+</body>
+</html>

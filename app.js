@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+const askGemini = require("./services/gemini.js");
 
 //Import models and utilities
 const rooms = require('./models/rooms.js')
@@ -68,6 +69,16 @@ app.get('/privacy', wrapAsync(async (req, res) => {
 app.get('/termsCondition', wrapAsync(async (req, res) => {
     res.render("index/termsCondition.ejs");
 }));
+
+// app.get("/test-ai", async (req, res) => {
+//   const answer = await askGemini(
+//     "Capital of India?"
+//   );
+//   res.send(answer);
+// });
+
+const aiRoutes = require("./routes/ai.js");
+app.use("/ai", aiRoutes);
 
 const dbs = require('./routes/dbs.js');
 app.use('/dbs' , dbs);
