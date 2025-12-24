@@ -1,10 +1,5 @@
-/* ============================================================================
-   CAMPUS NAVIGATION APP - MAIN STYLESHEET
-   ============================================================================
+/* UniNav MAIN STYLESHEET */
 
-/* ============================================================================
-   CSS RESET & BASE STYLES
-   ============================================================================ */
 * {
     margin: 0;
     padding: 0;
@@ -12,36 +7,35 @@
 }
 
 :root {
-    /* Background Gradient Colors
-       Gradient flows from bottom-right (orange) to top-left (indigo) */
-    --gradient-indigo: #0f1325;   /* Deep indigo/purple - top-left */
-    --gradient-purple: #1a0f2e;   /* Dark purple - middle */
-    --gradient-brown: #5a3d28;    /* Warm brown - middle */
-    --gradient-orange: #6b4528;   /* Burnt orange - bottom-right */
+    /* Background Gradient Colors */
+    --gradient-indigo: #0f1325;  
+    --gradient-purple: #1a0f2e;   
+    --gradient-brown: #5a3d28;    
+    --gradient-orange: #6b4528;  
     
     /* Text Colors */
     --text-white: #ffffff;
     --text-light: rgba(255, 255, 255, 0.95);
     --text-muted: rgba(255, 255, 255, 0.6);
-    --text-gold: #c49a6a;         /* Golden brown accent for hero text */
+    --text-gold: #c49a6a;  
     
     /* Button Gradient Colors */
-    --btn-gradient-start: #2a3549;      /* Dark blue */
-    --btn-gradient-end: #4a3d6b;        /* Purple/blue */
-    --btn-gradient-orange: #8b5a3c;     /* Orange for login button */
-    --btn-gradient-orange-end: #6b4528; /* Orange gradient end */
+    --btn-gradient-start: #2a3549;      
+    --btn-gradient-end: #4a3d6b;        
+    --btn-gradient-orange: #8b5a3c;     
+    --btn-gradient-orange-end: #6b4528; 
     
     /* Card Background Colors */
     --card-bg: #0f0f0f;
     --card-bg-light: #1a1a1a;
     
     /* Spacing Scale (8px base unit) */
-    --spacing-xs: 0.5rem;   /* 8px */
-    --spacing-sm: 1rem;     /* 16px */
-    --spacing-md: 1.5rem;   /* 24px */
-    --spacing-lg: 2rem;     /* 32px */
-    --spacing-xl: 3rem;     /* 48px */
-    --spacing-2xl: 4rem;    /* 64px */
+    --spacing-xs: 0.5rem;   
+    --spacing-sm: 1rem;     
+    --spacing-md: 1.5rem;   
+    --spacing-lg: 2rem;     
+    --spacing-xl: 3rem;    
+    --spacing-2xl: 4rem;    
     
     /* Z-Index Layers */
     --z-navbar: 1000;
@@ -49,19 +43,20 @@
     --z-overlay: 998;
 }
 
-/* ============================================================================
+/* 
    BASE HTML ELEMENTS
-   ============================================================================ */
+ */
+
 html {
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    scroll-behavior: smooth; 
 }
 
 body {
     margin: 0;
     padding: 0;
-    padding-top: 65px; /* Account for fixed navbar height */
+    padding-top: 65px; 
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--text-white);
@@ -75,7 +70,7 @@ body {
         var(--gradient-purple) 70%,
         var(--gradient-indigo) 100%
     );
-    background-attachment: fixed; /* Fixed for parallax-like effect */
+    background-attachment: fixed; 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -83,15 +78,16 @@ body {
 
 .container {
     width: 100%;
-    flex: 1; /* Allow container to grow and push footer down */
+    flex: 1; 
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
 
-/* ============================================================================
+/*
    PRIVACY & TERMS PAGES
-   ============================================================================ */
+ */
+
 .privacy-page,
 .terms-page {
     padding: 2rem 0;
@@ -214,12 +210,13 @@ body {
     }
 }
 
+
 /* 
    NAVIGATION BAR
 */
 
 .navbar {
-    position: fixed !important; /* Fixed to top */
+    position: fixed !important; 
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
@@ -250,9 +247,9 @@ body {
     position: relative;
 }
 
-/* Mobile Menu Toggle (Hamburger Icon) */
+
 .mobile-menu-toggle {
-    display: none; /* Hidden on desktop */
+    display: none; 
     flex-direction: column;
     gap: 4px;
     background: transparent;
@@ -270,7 +267,7 @@ body {
     border-radius: 2px;
 }
 
-/* Hamburger to X animation */
+
 .mobile-menu-toggle.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
 }
@@ -412,11 +409,9 @@ body {
     transform: translateY(0);
 }
 
-/* ============================================================================
-   HERO SECTION
-   ============================================================================
-   Full-viewport landing section with main call-to-action.
-   ============================================================================ */
+/* 
+   HOME SECTION
+*/
 .hero {
     min-height: calc(100vh - 81px);
     display: flex;
@@ -491,11 +486,10 @@ body {
     line-height: 1;
 }
 
-/* ============================================================================
-   SECTION STYLES (Shared)
-   ============================================================================
-   Common styles for all content sections.
-   ============================================================================ */
+/* 
+   SECTION STYLES 
+*/
+
 .section-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -519,11 +513,10 @@ body {
     font-weight: 400;
 }
 
-/* ============================================================================
+/*
    PROBLEM SECTION (Reddit-Style Cards)
-   ============================================================================
-   Displays student complaints in Reddit-inspired card format.
-   ============================================================================ */
+ */
+
 .problem-section {
     padding: 5rem 0;
     background: rgba(15, 19, 37, 0.4);
@@ -660,11 +653,10 @@ body {
     color: var(--text-muted);
 }
 
-/* ============================================================================
+/* 
    SOLUTION SECTION
-   ============================================================================
-   Showcases the app's key features with icon cards.
-   ============================================================================ */
+*/
+
 .solution-section {
     padding: 5rem 0;
     background: rgba(26, 15, 46, 0.4);
@@ -741,11 +733,10 @@ body {
     line-height: 1.6;
 }
 
-/* ============================================================================
+/* 
    TECH STACK SECTION
-   ============================================================================
-   Displays technologies organized by category in a grid layout.
-   ============================================================================ */
+*/
+
 .tech-section {
     padding: 5rem 0;
     background: rgba(90, 61, 40, 0.3);
@@ -892,11 +883,10 @@ body {
     font-weight: 500;
 }
 
-/* ============================================================================
+/* 
    DEVELOPERS SECTION
-   ============================================================================
-   Team member profiles with avatars and social links.
-   ============================================================================ */
+*/
+
 .developers-section {
     padding: 5rem 0;
     background: rgba(107, 69, 40, 0.3);
@@ -996,9 +986,10 @@ img.developer-avatar {
     transform: translateY(-2px);
 }
 
-/* ============================================================================
+/*
    FOOTER
-   ============================================================================ */
+*/
+
 .footer {
     background: rgba(15, 19, 37, 0.95);
     backdrop-filter: blur(10px);
@@ -1039,28 +1030,26 @@ img.developer-avatar {
     color: var(--text-white);
 }
 
-/* ============================================================================
+/*
    RESPONSIVE DESIGN
-   ============================================================================
-   Mobile-first responsive breakpoints for optimal viewing on all devices.
-   ============================================================================ */
+*/
 
 /* Tablet and Smaller Desktop (max-width: 1024px) */
 @media (max-width: 1024px) {
     .reddit-posts {
-        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-columns: 1fr;
     }
     
     .tech-columns {
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-template-columns: repeat(2, 1fr); 
     }
     
     .developers-grid {
-        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        grid-template-columns: repeat(2, 1fr); 
     }
     
     .solution-features {
-        grid-template-columns: 1fr; /* Single column */
+        grid-template-columns: 1fr; 
     }
     
     .section-container {
@@ -1093,7 +1082,7 @@ img.developer-avatar {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%; /* Hidden off-screen */
+        right: -100%; 
         width: 280px;
         max-width: 85vw;
         height: 100vh;
@@ -1114,7 +1103,7 @@ img.developer-avatar {
     }
     
     .nav-links.active {
-        right: 0; /* Slide in when active */
+        right: 0; 
     }
     
     .nav-link {

@@ -4,7 +4,6 @@ require("dotenv").config();
 //Import required modules
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');

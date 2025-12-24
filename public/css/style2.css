@@ -1,6 +1,6 @@
-/* =========================
+/*
    PAGE HEADER
-========================= */
+*/
 .page-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -31,9 +31,10 @@
     margin-left:3rem;
 }
 
-/* =========================
+/*
    BADGES
-========================= */
+*/
+
 .badge-custom {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 0.5rem 1rem;
@@ -50,9 +51,10 @@
     font-weight: 600;
 }
 
-/* =========================
+/* 
    FORM
-========================= */
+*/
+
 .form-panel {
     max-width: 900px;
     margin: 0 auto;
@@ -83,9 +85,10 @@
 .form-control.is-valid { border-color: #28a745; }
 .form-control.is-invalid { border-color: #dc3545; }
 
-/* =========================
+/* 
    FORM ACTIONS
-========================= */
+*/
+
 .form-actions {
     display: flex;
     gap: 1rem;
@@ -96,9 +99,10 @@
     flex-wrap: wrap;
 }
 
-/* =========================
+/*
    BUTTONS
-========================= */
+*/
+
 .btn-lg {
     padding: 0.75rem 1.5rem;
     font-weight: 600;
@@ -135,9 +139,9 @@
     color: white;
 }
 
-/* =========================
+/*
    TABLES & CARDS
-========================= */
+*/
 .card {
     border-radius: 12px;
     overflow: hidden;
@@ -171,9 +175,9 @@
     vertical-align: middle;
 }
 
-/* =========================
+/*
    EMPTY STATE
-========================= */
+*/
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
@@ -195,9 +199,10 @@
     font-size: 2.5rem;
 }
 
-/* =========================
+/*
    SHOW PAGE
-========================= */
+*/
+
 .show-card {
     max-width: 1000px;
     margin: 0 auto;
@@ -263,9 +268,10 @@
     color: #333;
 }
 
-/* =========================
+/*
    RESPONSIVE
-========================= */
+*/
+
 @media (max-width: 768px) {
     .page-header .page-title { font-size: 2rem; }
     .form-panel, .show-card__body { padding: 1.5rem; }
