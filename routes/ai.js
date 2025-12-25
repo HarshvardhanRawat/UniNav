@@ -14,7 +14,7 @@ router.post("/ask", requireAuth, async (req, res) => {
   const rooms = await Room.find();
 
   const context = rooms.map(r =>
-    `Building: ${r.building}, Floor: ${r.floor}, Room: ${r.room}, Landmark: ${r.landmark}, DIGIPIN: ${r.digipin}`
+    `Building: ${r.building}, Floor: ${r.floor}, Room: ${r.room}, Landmark: ${r.landmark}, ${r.directionHint ? `Direction Hint: ${r.directionHint}, ` : ''}DIGIPIN: ${r.digipin}`
   ).join("\n");
 
   const prompt = `
@@ -30,6 +30,7 @@ Building:
 Floor:
 Room:
 Landmark:
+Direction Hint:
 DIGIPIN:
 Map:
 

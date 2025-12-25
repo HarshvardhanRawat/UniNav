@@ -49,6 +49,18 @@
                 </div>
             </div>
 
+            <% if (room.directionHint) { %>
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-directions"></i>
+                </div>
+                <div class="info-content">
+                    <p class="info-label">Direction Hint</p>
+                    <p class="info-value"><%= room.directionHint %></p>
+                </div>
+            </div>
+            <% } %>
+
             <div class="info-card info-card-full">
                 <div class="info-icon">
                     <i class="fas fa-qrcode"></i>

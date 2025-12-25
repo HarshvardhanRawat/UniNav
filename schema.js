@@ -6,6 +6,7 @@ module.exports.roomSchema = joi.object({
         floor: joi.string().required(),
         room: joi.string().required(),
         landmark: joi.string().required(),
+        directionHint: joi.string().allow('').optional(),
         digipin: joi.string().required()
     }).required()
 });

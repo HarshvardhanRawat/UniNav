@@ -7,6 +7,7 @@ const roomSchema = new Schema({
     floor: String,
     room: String,
     landmark: String,
+    directionHint: String,
     digipin: String,
     mapLink: String,
 });
