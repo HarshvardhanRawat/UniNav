@@ -33,6 +33,10 @@ app.use(methodOverride('_method'));
 const connectMongo = require("./services/mongo");
 const port = process.env.PORT || 8080;
 
+//Cookie Parser
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
 //Session configuration
 const session = require('express-session');
 const sessionOptions = {

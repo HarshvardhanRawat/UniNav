@@ -799,6 +799,22 @@ body {
     color: var(--text-white);
 }
 
+.tech-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+img.tech-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
+    display: block;
+    flex-shrink: 0;
+}
+
 /* Technology Icon Color Variants */
 .tech-icon-react {
     background: #61dafb;
