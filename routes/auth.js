@@ -25,7 +25,8 @@ router.post("/login", async (req, res) => {
       maxAge: expiresIn,
       httpOnly: true,
       secure: false, // set true in production
-      sameSite: 'lax'
+      sameSite: 'lax',
+      path: '/'
     });
 
     res.status(200).json({ success: true, message: "Logged in" });
@@ -38,8 +39,45 @@ router.post("/login", async (req, res) => {
 
 // POST route to handle admin logout
 router.post("/logout", (req, res) => {
-  res.clearCookie("session");
-  res.send("Logged out");
+  res.clearCookie("session", {
+    path: '/',
+    httpOnly: true,
+    secure: false,
+    sameSite: 'lax'
+  });
+  res.status(200).json({ success: true, message: "Logged out" });
+});
+
+// GET route to check authentication status
+router.get("/status", async (req, res) => {
+  const sessionCookie = req.cookies.session;
+
+  if (!sessionCookie) {
+    return res.status(200).json({ authenticated: false });
+  }
+
+  try {
+    const decoded = await admin
+      .auth()
+      .verifySessionCookie(sessionCookie, true);
+    
+    res.status(200).json({ 
+      authenticated: true, 
+      user: {
+        email: decoded.email,
+        name: decoded.name
+      }
+    });
+  } catch (err) {
+    // Clear invalid cookie
+    res.clearCookie("session", {
+      path: '/',
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    });
+    res.status(200).json({ authenticated: false });
+  }
 });
 
 module.exports = router;

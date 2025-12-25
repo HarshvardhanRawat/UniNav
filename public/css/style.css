@@ -409,6 +409,50 @@ body {
     transform: translateY(0);
 }
 
+/* User Icon Button */
+.user-icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-gold);
+    padding: 0;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.user-icon-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 154, 106, 0.4);
+    background: rgba(196, 154, 106, 0.1);
+}
+
+.user-icon-btn:hover i {
+    color: var(--text-white) !important;
+}
+
+.user-icon-btn:active {
+    transform: translateY(0);
+}
+
+.user-icon-btn i {
+    transition: color 0.3s ease;
+    font-size: 1.5rem;
+    color: var(--text-gold);
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
 /* 
    HOME SECTION
 */
