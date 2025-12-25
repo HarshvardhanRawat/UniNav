@@ -1,5 +1,12 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("./firebaseKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+    privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  }),
+});
 
 // Initialize Firebase Admin only if not already initialized
 if (!admin.apps.length) {
