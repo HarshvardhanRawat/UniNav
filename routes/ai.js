@@ -5,7 +5,7 @@ const Room = require("../models/rooms.js");
 const requireAuth = require("../middleware/requireAuth.js");
 
 router.get("/", requireAuth, (req, res) => {
-  res.render("ai");
+  res.render("../views/index/ai", { answer: null });
 });
 
 router.post("/ask", requireAuth, async (req, res) => {
@@ -32,7 +32,7 @@ Reply in simple points.
 
   const answer = await askGemini(prompt);
 
-  res.render("ai", { answer });
+  res.render("../views/index/ai", { answer });
 });
 
 module.exports = router;
