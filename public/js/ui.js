@@ -1,18 +1,8 @@
-/**
- * ============================================================================
- * CAMPUS NAVIGATION APP - UI INTERACTIONS
- * ============================================================================
- * Handles mobile menu toggle, smooth scrolling, and other UI interactions.
- * ============================================================================
- */
+// UI Controllers for Mobile Menu and Smooth Scrolling
 
 (function() {
     'use strict';
 
-    /**
-     * Mobile Menu Controller
-     * Manages the hamburger menu toggle and slide-out navigation panel
-     */
     const MobileMenuController = {
         // DOM element references
         menuToggle: null,
@@ -23,9 +13,6 @@
         // Configuration
         MOBILE_BREAKPOINT: 768,
         
-        /**
-         * Initialize the mobile menu functionality
-         */
         init: function() {
             this.menuToggle = document.querySelector('.mobile-menu-toggle');
             this.navLinks = document.querySelector('.nav-links');
@@ -39,7 +26,6 @@
         },
         
         /**
-         * Create and configure the overlay element for mobile menu
          * @returns {HTMLElement} The overlay element
          */
         createOverlay: function() {

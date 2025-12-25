@@ -1,4 +1,3 @@
-// middleware/requireAuth.js
 const admin = require("../services/firebase");
 
 // Middleware to require authentication

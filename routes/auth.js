@@ -2,6 +2,7 @@ const express = require("express");
 const admin = require("../services/firebase");
 const router = express.Router();
 
+// POST route to handle admin login
 router.post("/login", async (req, res) => {
   const { idToken } = req.body;
 
@@ -35,6 +36,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// POST route to handle admin logout
 router.post("/logout", (req, res) => {
   res.clearCookie("session");
   res.send("Logged out");

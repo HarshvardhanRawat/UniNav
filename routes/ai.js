@@ -4,10 +4,12 @@ const askGemini = require("../services/gemini.js");
 const Room = require("../models/rooms.js");
 const requireAuth = require("../middleware/requireAuth.js");
 
+// GET route to render the AI question page
 router.get("/", requireAuth, (req, res) => {
   res.render("../views/index/ai", { answer: null });
 });
 
+// POST route to handle AI question submission
 router.post("/ask", requireAuth, async (req, res) => {
   const userQuestion = req.body.question;
 

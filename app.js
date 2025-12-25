@@ -7,10 +7,10 @@ const app = express();
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
-const askGemini = require("./services/gemini.js");
+// const askGemini = require("./services/gemini.js");
 
 //Import models and utilities
-const rooms = require('./models/rooms.js')
+// const rooms = require('./models/rooms.js')
 const path = require('path');
 const wrapAsync = require('./utilts/wrapAsync');
 
@@ -66,10 +66,12 @@ app.get('/', wrapAsync(async (req, res) => {
     res.render("index/index.ejs");
 }));
 
+//Privacy Policy Route
 app.get('/privacy', wrapAsync(async (req, res) => {
     res.render("index/privacy.ejs");
 }));
 
+//Terms and Conditions Route
 app.get('/termsCondition', wrapAsync(async (req, res) => {
     res.render("index/termsCondition.ejs");
 }));
@@ -83,28 +85,33 @@ app.get('/termsCondition', wrapAsync(async (req, res) => {
 
 // Login route
 app.get("/login", (req, res) => {
-    // Pass Firebase config to the view
-    // Note: You need to add these to your .env file or replace with actual values
     const firebaseConfig = {
-        apiKey: process.env.FIREBASE_API_KEY || "AIzaSyDummyKeyReplaceWithYourActualKey",
-        authDomain: process.env.FIREBASE_AUTH_DOMAIN || "uninav-a8bec.firebaseapp.com",
-        projectId: process.env.FIREBASE_PROJECT_ID || "uninav-a8bec",
-        storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "uninav-a8bec.appspot.com",
-        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "123456789012",
-        appId: process.env.FIREBASE_APP_ID || "1:123456789012:web:abcdefghijklmnop"
+    apiKey: "AIzaSyAq7W99zPt86yrMlXf9lHc2ZsJ7iJDtVCc",
+    authDomain: "uninav-a8bec.firebaseapp.com",
+    projectId: "uninav-a8bec",
+    storageBucket: "uninav-a8bec.firebasestorage.app",
+    messagingSenderId: "745452549104",
+    appId: "1:745452549104:web:ad0a5728d730135f7f6335",
+    measurementId: "G-7S2QGFWFK4"
     };
+
     res.render("login", { firebaseConfig });
 });
 
+
+//Login and Auth Routes
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes)
 
+//AI Routes
 const aiRoutes = require("./routes/ai.js");
 app.use("/ai", aiRoutes);
 
+//Database Management Routes
 const dbs = require('./routes/dbs.js');
 app.use('/dbs' , dbs);
 
+//Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

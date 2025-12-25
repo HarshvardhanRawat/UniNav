@@ -1,5 +1,6 @@
 const joi = require('joi');
 
+// Schema for validating room information
 module.exports.roomSchema = joi.object({
     room: joi.object({
         building: joi.string().required(),
