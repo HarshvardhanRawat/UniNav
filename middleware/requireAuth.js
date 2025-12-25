@@ -1,21 +1,26 @@
+// middleware/requireAuth.js
 const admin = require("../services/firebase");
 
+// Middleware to require authentication
 const requireAuth = async (req, res, next) => {
-  // const token = req.headers.authorization?.split("Bearer ")[1];
+  const sessionCookie = req.cookies.session;
 
-  // if (!token) {
-  //   return res.status(401).send("Unauthorized");
-  // }
+  // If no session cookie, redirect to login
+  if (!sessionCookie) {
+    return res.redirect("/login");
+  }
+  // Verify session cookie
+  try {
+    const decoded = await admin
+      .auth()
+      .verifySessionCookie(sessionCookie, true);
 
-  // try {
-  //   const decoded = await admin.auth().verifyIdToken(token);
-  //   req.user = decoded;
-  //   next();
-  // } catch (err) {
-  //   res.status(401).send("Invalid token");
-  // }
-
-  next();
+    req.user = decoded;
+    next();
+  } catch (err) {
+    res.clearCookie("session");
+    res.redirect("/login");
+  }
 };
 
 module.exports = requireAuth;

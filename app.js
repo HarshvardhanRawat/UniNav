@@ -14,8 +14,9 @@ const rooms = require('./models/rooms.js')
 const path = require('path');
 const wrapAsync = require('./utilts/wrapAsync');
 
-//Needed to read form data
+//Needed to read form data and JSON
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //Ejs-Mate setup
 app.engine('ejs', ejsMate);
@@ -79,6 +80,24 @@ app.get('/termsCondition', wrapAsync(async (req, res) => {
 //   );
 //   res.send(answer);
 // });
+
+// Login route
+app.get("/login", (req, res) => {
+    // Pass Firebase config to the view
+    // Note: You need to add these to your .env file or replace with actual values
+    const firebaseConfig = {
+        apiKey: process.env.FIREBASE_API_KEY || "AIzaSyDummyKeyReplaceWithYourActualKey",
+        authDomain: process.env.FIREBASE_AUTH_DOMAIN || "uninav-a8bec.firebaseapp.com",
+        projectId: process.env.FIREBASE_PROJECT_ID || "uninav-a8bec",
+        storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "uninav-a8bec.appspot.com",
+        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "123456789012",
+        appId: process.env.FIREBASE_APP_ID || "1:123456789012:web:abcdefghijklmnop"
+    };
+    res.render("login", { firebaseConfig });
+});
+
+const authRoutes = require("./routes/auth");
+app.use("/auth", authRoutes)
 
 const aiRoutes = require("./routes/ai.js");
 app.use("/ai", aiRoutes);
