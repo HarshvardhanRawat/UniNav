@@ -7,7 +7,8 @@ const roomSchema = new Schema({
     floor: String,
     room: String,
     landmark: String,
-    digipin: String
+    digipin: String,
+    mapLink: String,
 });
 
 const rooms = mongoose.model('rooms' , roomSchema);

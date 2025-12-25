@@ -6,6 +6,8 @@ const {roomSchema} = require('../schema.js');
 const Room = require('../models/rooms.js');
 const methodOverride = require('method-override');
 
+const { addMapLinkToRoomData } = require("../services/digipin");
+
 
 //Method Override setup
 router.use(methodOverride('_method'));
@@ -54,7 +56,12 @@ router.get('/:id', wrapAsync(async (req, res) => {
 
 //Create route
 router.post('/', validateRoom, wrapAsync(async (req, res) => {
-    const newroom = new Room(req.body.room);
+    const roomData = { ...req.body.room };
+    
+    // Automatically add mapLink to room data
+    const roomDataWithMapLink = addMapLinkToRoomData(roomData);
+    
+    const newroom = new Room(roomDataWithMapLink);
     await newroom.save();
     req.flash('success', 'Successfully created a new room entry!');
     res.redirect("/dbs");
@@ -78,7 +85,12 @@ router.get('/:id/edit', wrapAsync(async (req, res) => {
 //Update route
 router.put('/:id', validateRoom, wrapAsync(async (req, res) => {
     let {id} = req.params;
-    const room = await Room.findByIdAndUpdate(id, {...req.body.room});
+    const roomData = { ...req.body.room };
+    
+    // Automatically add/update mapLink to room data
+    const roomDataWithMapLink = addMapLinkToRoomData(roomData);
+    
+    const room = await Room.findByIdAndUpdate(id, roomDataWithMapLink, { new: true });
     req.flash('success', 'Successfully updated the room!');
     res.redirect(`/dbs/${room._id}`);
 }));

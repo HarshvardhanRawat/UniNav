@@ -19,7 +19,19 @@ router.post("/ask", requireAuth, async (req, res) => {
 
   const prompt = `
 You are a campus navigation assistant.
-Using ONLY the data below, answer the question clearly.
+
+Answer ONLY using the data below.
+Do NOT invent anything.
+
+For the answer, return this format:
+
+Location:
+Building:
+Floor:
+Room:
+Landmark:
+DIGIPIN:
+Map:
 
 DATA:
 ${context}
