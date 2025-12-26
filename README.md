@@ -1,126 +1,84 @@
-# 🧭 UniNav – Smart Campus Navigation System
+UniNav 🧭
 
-<p align="center">
-  <b>Helping students find classrooms effortlessly on campus.</b>
-</p>
+Smart Campus Navigation System
 
----
+📌 Overview
 
-## 📌 What is UniNav?
+UniNav is a smart, AI-powered campus navigation system designed to help students, faculty, and visitors easily find classrooms, labs, offices, and other important locations within large university campuses.
 
-UniNav is a **smart campus navigation web app** that helps students, faculty, and visitors easily find **classrooms, labs, offices, and buildings** inside large university campuses.
+Users can simply ask questions like “Where is Room 105?”, and UniNav responds with accurate room-level navigation details including building, floor, landmarks, and a Google Maps link.
 
-Large campuses can feel confusing and maze-like — especially for first-year students.  
-UniNav solves this by providing **clear, structured location details** and **easy search-based navigation**.
+❓ Problem Statement
 
----
+Large university campuses are often confusing and difficult to navigate, especially for first-year students and visitors. The absence of a centralized, room-level navigation system leads to wasted time, stress, and missed classes or meetings.
 
-## 🖼️ Preview (Concept)
+💡 Solution
 
+UniNav solves this problem by combining structured campus data with an AI-powered assistant. It provides fast, accurate, and user-friendly navigation through natural language queries and Google-integrated location services.
 
+✨ Key Features
 
-::contentReference[oaicite:0]{index=0}
+🤖 AI-powered navigation assistant
 
+🔐 Google Sign-In authentication
 
----
+🗂️ Room database management (Add, Edit, Delete rooms)
 
-## 🚩 Problem Statement
+📍 DIGIPIN-based precise location mapping
 
-Students and visitors often face problems like:
-- ❌ Getting lost on campus
-- ❌ No proper digital map for rooms
-- ❌ Confusing building layouts
-- ❌ Difficulty finding floors and offices
+🗺️ Automatic Google Maps link generation
 
-This wastes time and creates unnecessary stress.
+📱 Responsive web interface (mobile & desktop)
 
----
+🛠️ Tech Stack
+Frontend
 
-## 💡 Our Solution
+HTML, CSS, JavaScript
 
-UniNav provides:
-- 🔍 Easy search for rooms and locations  
-- 🧭 Clear navigation details (building, floor, landmarks)  
-- 🌐 A clean, student-friendly interface  
+EJS Templates
 
-Everything in **one place**, designed for **real campus use**.
+Bootstrap
 
----
+Font Awesome
 
-## ✨ Key Features
+Backend
 
-- 🔍 **Smart Search**  
-  Search by room number, building name, or landmark
+Node.js
 
-- 🧭 **Structured Location Info**  
-  Building name, floor number, nearby landmark
+Express.js
 
-- 📱 **Responsive Design**  
-  Works smoothly on mobile and desktop
+Database
 
-- 🔐 **Secure Login**  
-  Google Sign-In using Firebase Authentication
+MongoDB
 
-- 🚀 **Scalable Design**  
-  Ready for future map and AI features
+Mongoose
 
----
+Authentication & APIs
 
-## 🛠️ Tech Stack
+Firebase Authentication (Google Sign-In)
 
-| Layer | Technology |
-|-----|-----------|
-| Frontend | HTML, CSS, JavaScript |
-| Backend | Firebase Firestore |
-| Auth | Firebase Google Authentication |
-| Version Control | Git & GitHub |
+Google Gemini API (AI)
 
----
+Google Maps API
 
-## ⚙️ How UniNav Works
+🚀 MVP Functionality
 
-1️⃣ User logs in with Google  
-2️⃣ Searches for a room or location  
-3️⃣ UniNav shows detailed location info  
-4️⃣ User follows directions to reach destination  
+User logs in using Google Sign-In
 
-Simple. Fast. Reliable.
+User asks a navigation question
 
----
+AI processes the query using room data
 
-## 📂 Project Structure
+Accurate navigation details are displayed
 
+🔮 Future Enhancements
 
----
+Indoor turn-by-turn navigation
 
-## 🎯 Use Cases
+Multi-campus support
 
-- 👨‍🎓 First-year students  
-- 🧑‍🏫 Faculty members  
-- 🧍 Visitors & parents  
-- 🎉 College events & fests  
+Mobile application
 
----
+Multilingual AI assistant
 
-## 🔮 Future Enhancements
-
-- 🗺️ Interactive campus maps  
-- 🤖 AI-based directions  
-- 📍 Digital location codes  
-- 📱 Progressive Web App (PWA)
-
----
-
-## 👨‍💻 Team
-
-This project was built as a **college innovation project** to solve real-world campus navigation problems.
-
----
-
-## 📜 License
-
-This project is intended for **educational and academic use**.
-
----
-
-⭐ If you like this project, consider starring the repository!
+Live location tracking
