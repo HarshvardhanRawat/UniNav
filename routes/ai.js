@@ -27,7 +27,7 @@ Do NOT invent anything.
 
 For the answer, return this format:
 
-Location:
+Location -
 Building:
 Floor:
 Room:

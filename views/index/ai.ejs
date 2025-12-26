@@ -10,18 +10,130 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="ai-container">
-        <h1>Campus AI Assistant</h1>
-        
-        <form method="POST" action="/ai/ask">
-            <input type="text" name="question" placeholder="Where is my class?" required />
-            <button type="submit">Ask AI</button>
-        </form>
-        
-        <% if (answer) { %>
-            <h3>Answer:</h3>
-            <pre><%= answer %></pre>
-        <% } %>
+    <div class="ai-wrapper">
+        <div class="ai-container">
+            <!-- Header Section -->
+            <div class="chat-header">
+                <div class="header-icon">🤖</div>
+                <h1>Hey there! 👋</h1>
+                <p class="header-subtitle">I'm your friendly campus guide. Where would you like to go today?</p>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="messages-area" id="messagesArea">
+                <!-- Welcome Message -->
+                <div class="message bot-message">
+                    <div class="message-avatar">🎯</div>
+                    <div class="message-bubble bot-bubble">
+                        <p>Hi! I'm here to help you navigate campus with ease! 🗺️</p>
+                        <p class="message-hint">Ask me anything like "Where is room 203?" or "How do I get to the library?"</p>
+                    </div>
+                </div>
+
+                <% if (answer) { %>
+                <!-- User Question (if we had it, would show here) -->
+                <!-- Bot Answer -->
+                <div class="message bot-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-bubble bot-bubble">
+                        <div class="answer-content"><%= answer %></div>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+
+            <!-- Input Section -->
+            <div class="input-section">
+                <form method="POST" action="/ai/ask" id="aiForm" class="chat-form">
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            name="question" 
+                            id="questionInput"
+                            placeholder="Ask me anything about campus locations..." 
+                            required 
+                            autocomplete="off"
+                        />
+                        <button type="submit" class="send-button" id="sendButton">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <p class="input-hint">💡 Tip: Press Enter to send</p>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Simple form enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('aiForm');
+            const input = document.getElementById('questionInput');
+            const sendButton = document.getElementById('sendButton');
+            const messagesArea = document.getElementById('messagesArea');
+
+            // Focus input on load
+            input.focus();
+
+            // Handle Enter key
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (input.value.trim()) {
+                        form.submit();
+                    }
+                }
+            });
+
+            // Add user message before form submission
+            form.addEventListener('submit', function(e) {
+                const question = input.value.trim();
+                if (question) {
+                    // Add user message to UI
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user-message';
+                    userMessage.innerHTML = `
+                        <div class="message-avatar">👤</div>
+                        <div class="message-bubble user-bubble">
+                            <p>${escapeHtml(question)}</p>
+                        </div>
+                    `;
+                    messagesArea.appendChild(userMessage);
+
+                    // Add loading message
+                    const loadingMessage = document.createElement('div');
+                    loadingMessage.className = 'message bot-message loading-message';
+                    loadingMessage.innerHTML = `
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-bubble bot-bubble">
+                            <div class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    `;
+                    messagesArea.appendChild(loadingMessage);
+
+                    // Scroll to bottom
+                    messagesArea.scrollTop = messagesArea.scrollHeight;
+                }
+            });
+
+            // Scroll to bottom on load if there's an answer
+            if (messagesArea.scrollHeight > messagesArea.clientHeight) {
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        });
+    </script>
 </body>
 </html>
