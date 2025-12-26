@@ -51,10 +51,5 @@ UniNav provides an AI-based navigation assistant that allows users to ask questi
 
 ---
 
-## 👥 Team
-Developed as a hackathon project by the UniNav team.
-
----
-
 ## 📄 License
 This project is intended for educational and hackathon use.
