@@ -1,84 +1,60 @@
-UniNav 🧭
+# UniNav 🧭
+### Smart Campus Navigation System
 
-Smart Campus Navigation System
+UniNav is an AI-powered campus navigation system designed to help students, faculty, and visitors easily locate classrooms, labs, offices, and other campus locations using natural language queries.
 
-📌 Overview
+---
 
-UniNav is a smart, AI-powered campus navigation system designed to help students, faculty, and visitors easily find classrooms, labs, offices, and other important locations within large university campuses.
+## 🚩 Problem
+Large university campuses are difficult to navigate, especially for first-year students and visitors. The lack of a centralized, room-level navigation system leads to confusion, wasted time, and unnecessary stress.
 
-Users can simply ask questions like “Where is Room 105?”, and UniNav responds with accurate room-level navigation details including building, floor, landmarks, and a Google Maps link.
+---
 
-❓ Problem Statement
+## 💡 Solution
+UniNav provides an AI-based navigation assistant that allows users to ask questions like **“Where is Room 105?”** and instantly receive accurate location details such as building, floor, nearby landmarks, and a Google Maps link.
 
-Large university campuses are often confusing and difficult to navigate, especially for first-year students and visitors. The absence of a centralized, room-level navigation system leads to wasted time, stress, and missed classes or meetings.
+---
 
-💡 Solution
+## ✨ Features
+- AI-powered natural language navigation
+- Google Sign-In authentication
+- Room database management (CRUD)
+- DIGIPIN-based precise location mapping
+- Google Maps link generation
+- Responsive web interface
 
-UniNav solves this problem by combining structured campus data with an AI-powered assistant. It provides fast, accurate, and user-friendly navigation through natural language queries and Google-integrated location services.
+---
 
-✨ Key Features
+## 🛠️ Tech Stack
+**Frontend:** HTML, CSS, JavaScript, EJS, Bootstrap  
+**Backend:** Node.js, Express.js  
+**Database:** MongoDB, Mongoose  
+**Authentication:** Firebase Google Sign-In  
+**AI & APIs:** Google Gemini API, Google Maps API  
 
-🤖 AI-powered navigation assistant
+---
 
-🔐 Google Sign-In authentication
+## 🚀 MVP Workflow
+1. User logs in using Google Sign-In  
+2. User asks a navigation query  
+3. Backend fetches room data from database  
+4. Gemini AI processes the query  
+5. Navigation details are displayed to the user  
 
-🗂️ Room database management (Add, Edit, Delete rooms)
+---
 
-📍 DIGIPIN-based precise location mapping
+## 🔮 Future Scope
+- Indoor turn-by-turn navigation
+- Multi-campus support
+- Mobile application
+- Multilingual AI assistant
 
-🗺️ Automatic Google Maps link generation
+---
 
-📱 Responsive web interface (mobile & desktop)
+## 👥 Team
+Developed as a hackathon project by the UniNav team.
 
-🛠️ Tech Stack
-Frontend
+---
 
-HTML, CSS, JavaScript
-
-EJS Templates
-
-Bootstrap
-
-Font Awesome
-
-Backend
-
-Node.js
-
-Express.js
-
-Database
-
-MongoDB
-
-Mongoose
-
-Authentication & APIs
-
-Firebase Authentication (Google Sign-In)
-
-Google Gemini API (AI)
-
-Google Maps API
-
-🚀 MVP Functionality
-
-User logs in using Google Sign-In
-
-User asks a navigation question
-
-AI processes the query using room data
-
-Accurate navigation details are displayed
-
-🔮 Future Enhancements
-
-Indoor turn-by-turn navigation
-
-Multi-campus support
-
-Mobile application
-
-Multilingual AI assistant
-
-Live location tracking
+## 📄 License
+This project is intended for educational and hackathon use.
