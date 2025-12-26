@@ -111,6 +111,35 @@ app.use("/ai", aiRoutes);
 const dbs = require('./routes/dbs.js');
 app.use('/dbs' , dbs);
 
+// 404 Handler - must be after all routes
+app.use((req, res, next) => {
+    const ExpressError = require('./utilts/ExpressError');
+    next(new ExpressError(404, 'Page Not Found'));
+});
+
+// Error Handler Middleware - must be last
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) {
+        err.message = 'Something went wrong!';
+    }
+    
+    // Log error for debugging
+    console.error('Error:', err);
+    
+    // Check if request expects JSON (API routes)
+    if (req.originalUrl.startsWith('/auth') || req.headers.accept?.includes('application/json')) {
+        return res.status(statusCode).json({
+            success: false,
+            error: err.message,
+            statusCode: statusCode
+        });
+    }
+    
+    // Render error page for regular requests
+    res.status(statusCode).render('error', { err });
+});
+
 //Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
