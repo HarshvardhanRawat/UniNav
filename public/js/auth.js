@@ -114,10 +114,11 @@ class AuthManager {
     }
 
     /**
-     * Handle logout - call logout endpoint and update UI
+     * Handle logout - call logout endpoint and clear all auth state
      */
     async handleLogout() {
         try {
+            // Clear server session
             const response = await fetch('/auth/logout', {
                 method: 'POST',
                 credentials: 'include'
@@ -133,11 +134,9 @@ class AuthManager {
                 // Update UI
                 this.updateUI('unauthenticated');
                 
-                // If on a protected page, redirect to home
-                const currentPath = window.location.pathname;
-                if (currentPath !== '/' && !currentPath.startsWith('/login')) {
-                    window.location.href = '/';
-                }
+                // Redirect to login page to ensure Firebase auth is cleared
+                // The login page will handle Firebase sign out if needed
+                window.location.href = '/login?logout=true';
             } else {
                 throw new Error(data.error || 'Logout failed');
             }

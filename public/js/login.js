@@ -63,31 +63,62 @@ signInBtn.addEventListener('click', async () => {
         }
 });
 
-// Check if user is already signed in
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        // User is already signed in, get token and verify session
-        user.getIdToken().then(async (idToken) => {
+// Handle logout parameter - sign out from Firebase if redirected from logout
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('logout') === 'true') {
+    // User was redirected here after logout, sign out from Firebase
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
             try {
-                const response = await fetch('/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ idToken }),
-                    credentials: 'include'
-                });
-
-                const data = await response.json().catch(() => ({}));
-
-                if (response.ok) {
-                    window.location.href = '/ai';
-                } else {
-                    console.error('Session verification failed:', data.error || 'Unknown error');
-                }
+                const { signOut } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+                await signOut(auth);
             } catch (error) {
-                console.error('Session verification error:', error);
+                console.error('Error signing out from Firebase:', error);
             }
-        });
+        }
+    });
+    // Clean up URL
+    window.history.replaceState({}, document.title, '/login');
+}
+
+// Check if user is already signed in, but only auto-login if server session is valid
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        // Skip auto-login if we're handling a logout
+        if (urlParams.get('logout') === 'true') {
+            return;
+        }
+        
+        // First check if there's a valid server session
+        try {
+            const statusResponse = await fetch('/auth/status', {
+                method: 'GET',
+                credentials: 'include'
+            });
+            
+            const statusData = await statusResponse.json();
+            
+            // Only auto-login if server session is valid
+            if (statusData.authenticated) {
+                // Server session is valid, redirect to AI page
+                window.location.href = '/ai';
+                return;
+            }
+            
+            // Server session is invalid, but Firebase user exists
+            // This means user was logged out but Firebase session persists
+            // Sign out from Firebase to clear the state
+            const { signOut } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+            await signOut(auth);
+        } catch (error) {
+            console.error('Error checking server session:', error);
+            // On error, sign out from Firebase to be safe
+            try {
+                const { signOut } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+                await signOut(auth);
+            } catch (signOutError) {
+                console.error('Error signing out from Firebase:', signOutError);
+            }
+        }
     }
 });
