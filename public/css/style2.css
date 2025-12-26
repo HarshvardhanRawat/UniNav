@@ -4,31 +4,41 @@
 .page-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 3rem 0;
+    padding: 2rem 0;
     margin-bottom: 2rem;
-    height: 12rem;
+    min-height: 12rem;
+}
+
+.page-header .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .page-header .eyebrow {
     text-transform: uppercase;
+    margin-left: 3rem !important;
     font-size: 0.875rem;
     letter-spacing: 0.1em;
     opacity: 0.9;
-    margin-bottom: 0.1rem;
-    margin-left:3rem;
+    margin-bottom: 0.2rem;
+    margin-left: 0;
 }
 
 .page-header .page-title {
     font-size: 2.5rem;
     font-weight: 700;
+    margin-left: 3rem !important;
     margin-bottom: 0.5rem;
-    margin-left:3rem;
+    margin-left: 0;
+    word-wrap: break-word;
 }
 
 .page-header .page-subtitle {
     font-size: 1.125rem;
     opacity: 0.9;
-    margin-left:3rem;
+    margin-left: 3rem !important;
+    margin-left: 0;
+    word-wrap: break-word;
 }
 
 /*
@@ -64,6 +74,11 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.form-panel .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .form-label {
     font-weight: 600;
     color: #333;
@@ -97,6 +112,27 @@
     padding-top: 2rem;
     border-top: 2px solid #f0f0f0;
     flex-wrap: wrap;
+}
+
+.form-actions form {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+@media (max-width: 767.98px) {
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn,
+    .form-actions form,
+    .form-actions a {
+        width: 100%;
+    }
+    
+    .form-actions form .btn {
+        width: 100%;
+    }
 }
 
 /*
@@ -206,7 +242,7 @@
 .show-card {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .show-card__body {
@@ -232,6 +268,7 @@
     align-items: center;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    min-width: 0;
 }
 
 .info-card:hover {
@@ -242,9 +279,20 @@
 
 .info-card-full { grid-column: 1 / -1; }
 
+.info-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.info-value {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .info-icon {
     width: 60px;
     height: 60px;
+    min-width: 60px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 12px;
     display: flex;
@@ -252,6 +300,7 @@
     justify-content: center;
     color: white;
     font-size: 1.5rem;
+    flex-shrink: 0;
 }
 
 .info-label {
@@ -272,11 +321,96 @@
    RESPONSIVE
 */
 
-@media (max-width: 768px) {
-    .page-header .page-title { font-size: 2rem; }
-    .form-panel, .show-card__body { padding: 1.5rem; }
-    .form-actions { flex-direction: column; }
-    .form-actions .btn,
-    .btn-group .btn { width: 100%; }
-    .room-info-grid { grid-template-columns: 1fr; }
+/* Extra Small devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
+    .page-header {
+        padding: 1.5rem 0;
+        min-height: auto;
+    }
+    
+    .page-header .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .page-header .page-subtitle {
+        font-size: 1rem;
+    }
+    
+    .form-panel,
+    .show-card__body {
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+    
+    .room-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .info-card {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    .info-value {
+        font-size: 1rem;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.95rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .page-header .page-title {
+        font-size: 2rem;
+    }
+    
+    .form-panel,
+    .show-card__body {
+        padding: 1.5rem;
+    }
+    
+    .room-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .info-card-full {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .room-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .info-card-full {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .room-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
