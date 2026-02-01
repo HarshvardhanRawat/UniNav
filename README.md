@@ -1,4 +1,4 @@
-# UniNav 🧭
+# UniNav - Prototype-01 🧭
 ### Smart Campus Navigation System
 
 UniNav is an AI-powered campus navigation system designed to help students, faculty, and visitors easily locate classrooms, labs, offices, and other campus locations using natural language queries.
